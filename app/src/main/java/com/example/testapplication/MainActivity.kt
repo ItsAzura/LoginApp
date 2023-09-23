@@ -1,6 +1,7 @@
 package com.example.testapplication
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -17,8 +18,13 @@ class MainActivity : ComponentActivity() {
         val btnEnter = findViewById<Button>(R.id.button)
 
         btnEnter.setOnClickListener {
-            val emailValue = email.text.toString()
-            Toast.makeText(this, "Welcome $emailValue", Toast.LENGTH_SHORT).show()
+            val emailValue = email.text.toString().substringBefore('@')
+            //Toast.makeText(this, "Welcome $emailValue", Toast.LENGTH_SHORT).show()
+            var name = email.text.toString().substringBefore("@")
+            Intent(this, com.example.testapplication.SecondActivity::class.java).also {
+                it.putExtra("NAME", name)
+                startActivity(it)
+            }
         }
 
     }
